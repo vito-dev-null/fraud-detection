@@ -78,13 +78,13 @@ class TransactionControllerIntegrationTest {
                 .andExpect(jsonPath("$.status").value(400));
     }
 
-        @Test
-        void rejectsMalformedTransactionBody() throws Exception {
-                mockMvc.perform(post("/api/v1/transactions")
-                                                .contentType(MediaType.APPLICATION_JSON)
-                                                .content("{invalid-json"))
-                                .andExpect(status().isBadRequest())
-                                .andExpect(jsonPath("$.message").value("Request body is missing or malformed"))
-                                .andExpect(jsonPath("$.details").isEmpty());
-        }
+    @Test
+    void rejectsMalformedTransactionBody() throws Exception {
+        mockMvc.perform(post("/api/v1/transactions")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{invalid-json"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value("Request body is missing or malformed"))
+                .andExpect(jsonPath("$.details").isEmpty());
+    }
 }
