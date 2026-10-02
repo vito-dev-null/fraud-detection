@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="it">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#202621">
+    <title>Fraud Detection | Risk Desk</title>
+    <link rel="stylesheet" href="/app.css">
+    <script src="/app.js" defer></script>
+</head>
+
+<body>
+    <div class="app-shell">
+        <aside class="sidebar" aria-label="Navigazione principale">
+            <a class="brand" href="#top" aria-label="Fraud Detection, dashboard">
+                <span class="brand-mark">FD</span>
+                <span class="brand-name">risk desk<span>FRAUD DETECTION</span></span>
+            </a>
+
+            <div class="nav-caption">WORKSPACE</div>
+            <nav class="side-nav">
+                <a class="nav-link active" href="#top"><span class="nav-index">01</span>Panoramica</a>
+                <a class="nav-link" href="#evaluation"><span class="nav-index">02</span>Nuova analisi</a>
+                <a class="nav-link" href="#history"><span class="nav-index">03</span>Registro locale</a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <div class="environment-label">AMBIENTE</div>
+                <div class="environment-value"><span class="status-dot"></span>Locale · Java 25</div>
+                <div class="sidebar-footnote">Motore di valutazione<br>transazioni in tempo reale</div>
+            </div>
+        </aside>
+
+        <main id="top" class="main-content">
+            <header class="topbar">
+                <div class="breadcrumb"><span>RISK OPERATIONS</span><span
+                        class="breadcrumb-divider">/</span><span>WORKSPACE</span></div>
+                <div class="topbar-right">
+                    <span class="live-dot"></span><span>Connessione protetta</span>
+                    <details class="api-access">
+                        <summary>Accesso API</summary>
+                        <div class="api-access-panel">
+                            <label for="api-key">Chiave API remota</label>
+                            <input id="api-key" type="password" minlength="32" maxlength="256" autocomplete="off"
+                                spellcheck="false" placeholder="Inserisci la chiave ricevuta">
+                            <p>Usata solo in questa scheda; non viene salvata.</p>
+                        </div>
+                    </details>
+                </div>
+            </header>
+
+            <section class="page-heading">
+                <div>
+                    <p class="eyebrow">CENTRO DI CONTROLLO <span>·</span> 02 OTT 2026</p>
+                    <h1>Valutazione transazioni</h1>
+                    <p class="heading-copy">Analizza un pagamento e consulta subito il punteggio di rischio.</p>
+                    <p class="heading-disclaimer">Nessun pagamento viene eseguito. Non inserire dati reali o
+                        identificativi personali.</p>
+                </div>
+                <a class="heading-action" href="#evaluation"><span class="action-plus">+</span>Nuova valutazione</a>
+            </section>
+
+            <section class="metrics" aria-label="Riepilogo delle valutazioni in questa scheda">
+                <div class="metric-item">
+                    <span class="metric-label">ANALISI REGISTRATE</span>
+                    <strong id="metric-total" class="metric-value">0</strong>
+                    <span class="metric-note">solo memoria temporanea</span>
+                </div>
+                <div class="metric-item metric-alert">
+                    <span class="metric-label">TRANSAZIONI BLOCCATE</span>
+                    <strong id="metric-blocked" class="metric-value">0</strong>
+                    <span class="metric-note">decisioni del motore</span>
+                </div>
+                <div class="metric-item metric-approval">
+                    <span class="metric-label">APPROVAZIONI</span>
+                    <strong id="metric-approved" class="metric-value">0%</strong>
+                    <span class="metric-note">sul totale analizzato</span>
+                </div>
+                <div class="metric-stamp"><span class="stamp-ring">25</span><span>JAVA<br><b>LTS</b></span></div>
+            </section>
+
+            <section id="evaluation" class="workbench" aria-label="Analisi di una transazione">
+                <article class="panel form-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <p class="panel-kicker">01 <span>/</span> INPUT</p>
+                            <h2>Dati transazione</h2>
+                        </div>
+                        <span class="required-note">* obbligatorio</span>
+                    </div>
+
+                    <form id="transaction-form">
+                        <div class="field-grid">
+                            <label class="field field-wide" for="transactionId">ID transazione <span>*</span>
+                                <input id="transactionId" name="transactionId" type="text" maxlength="64" required
+                                    autocomplete="off">
+                            </label>
+                            <label class="field" for="userId">ID utente <span>*</span>
+                                <input id="userId" name="userId" type="text" maxlength="64" placeholder="es. user-1042"
+                                    required autocomplete="off">
+                            </label>
+                            <label class="field" for="amount">Importo <span>*</span>
+                                <div class="input-affix"><span class="input-prefix">€</span><input id="amount"
+                                        name="amount" type="number" min="0.01" step="0.01" value="6200.00" required>
+                                </div>
+                            </label>
+                            <label class="field" for="currency">Valuta <span>*</span>
+                                <select id="currency" name="currency" required>
+                                    <option value="EUR">EUR · Euro</option>
+                                    <option value="USD">USD · Dollaro</option>
+                                    <option value="GBP">GBP · Sterlina</option>
+                                    <option value="CHF">CHF · Franco svizzero</option>
+                                </select>
+                            </label>
+                            <label class="field" for="merchantCategory">Categoria esercente <span>*</span>
+                                <select id="merchantCategory" name="merchantCategory" required>
+                                    <option value="RETAIL">Vendita al dettaglio</option>
+                                    <option value="GROCERY">Alimentari</option>
+                                    <option value="ELECTRONICS">Elettronica</option>
+                                    <option value="TRAVEL">Viaggi</option>
+                                    <option value="DIGITAL">Servizi digitali</option>
+                                    <option value="OTHER">Altro</option>
+                                </select>
+                            </label>
+                            <label class="field" for="timestamp">Data e ora <span>*</span>
+                                <input id="timestamp" name="timestamp" type="datetime-local" required>
+                            </label>
+                            <label class="field field-wide" for="city">Città <span>*</span>
+                                <input id="city" name="city" type="text" maxlength="120" value="Milano" required
+                                    autocomplete="address-level2">
+                            </label>
+                            <div class="field field-wide coordinate-group">
+                                <span class="field-label">Coordinate <small>facoltative</small></span>
+                                <div class="coordinate-fields">
+                                    <label class="visually-hidden" for="latitude">Latitudine</label>
+                                    <input id="latitude" name="latitude" type="number" min="-90" max="90" step="any"
+                                        placeholder="Latitudine">
+                                    <label class="visually-hidden" for="longitude">Longitudine</label>
+                                    <input id="longitude" name="longitude" type="number" min="-180" max="180" step="any"
+                                        placeholder="Longitudine">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="form-error" class="form-error" role="alert" hidden></div>
+                        <div class="form-actions">
+                            <button id="reset-form" class="button button-quiet" type="button">Ripristina</button>
+                            <button id="submit-button" class="button button-primary" type="submit"><span
+                                    id="submit-label">Analizza transazione</span><span aria-hidden="true"
+                                    class="button-arrow">↗</span></button>
+                        </div>
+                    </form>
+                </article>
+
+                <article class="panel result-panel" aria-live="polite" aria-atomic="true">
+                    <div class="panel-heading">
+                        <div>
+                            <p class="panel-kicker">02 <span>/</span> ESITO</p>
+                            <h2>Decisione motore</h2>
+                        </div>
+                        <span class="engine-tag"><span class="engine-dot"></span>RULE ENGINE</span>
+                    </div>
+                    <div id="result-content" class="result-content">
+                        <div class="result-empty">
+                            <div class="empty-symbol" aria-hidden="true"><span></span><span></span><span></span></div>
+                            <p class="empty-title">In attesa di una transazione</p>
+                            <p class="empty-copy">Inserisci i dati e avvia l’analisi per visualizzare la decisione.</p>
+                        </div>
+                    </div>
+                    <div class="result-foot"><span>SOGLIA EUR</span><strong>5.000,00 €</strong><span
+                            class="foot-separator"></span><span>VELOCITÀ</span><strong>5 / 5 min</strong></div>
+                </article>
+            </section>
+
+            <section id="history" class="history-section">
+                <div class="history-heading">
+                    <div>
+                        <p class="panel-kicker">03 <span>/</span> ATTIVITÀ</p>
+                        <h2>Registro recente</h2>
+                    </div>
+                    <button id="clear-history" class="text-button" type="button" disabled>Cancella registro</button>
+                </div>
+                <div class="history-table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>TRANSAZIONE</th>
+                                <th>UTENTE</th>
+                                <th>IMPORTO</th>
+                                <th>DECISIONE</th>
+                                <th>RISCHIO</th>
+                                <th>ORA</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-body"></tbody>
+                    </table>
+                    <div id="history-empty" class="history-empty">Nessuna analisi registrata in questo browser.</div>
+                </div>
+                <p class="history-note"><span class="note-mark">i</span>Il registro resta solo in memoria in questa
+                    scheda e viene cancellato al refresh o alla chiusura.</p>
+            </section>
+
+            <footer class="page-footer"><span>FRAUD DETECTION ENGINE</span><span>API
+                    <code>/api/v1/transactions</code></span><span>JAVA 25 LTS</span></footer>
+        </main>
+    </div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+
+</html>

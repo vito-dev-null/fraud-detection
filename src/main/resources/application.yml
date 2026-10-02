@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: fraud-detection
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+
+server:
+  address: ${SERVER_ADDRESS:127.0.0.1}
+  port: ${SERVER_PORT:8081}
+
+fraud:
+  security:
+    api-key: ${FRAUD_API_KEY:}
+
+  rules:
+    amount-threshold-eur: 5000.00
+    velocity:
+      max-transactions: 5
+      window: PT5M
+      location-window: PT10M
+      minimum-distance-km: 500

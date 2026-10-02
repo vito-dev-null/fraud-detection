@@ -1,0 +1,11 @@
+target/
+build/
+*.log
+.env
+.env.*
+!.env.example
+.idea/
+.vscode/
+*.iml
+.DS_Store
+.github/modernize/java-upgrade/
