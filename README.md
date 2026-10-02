@@ -64,3 +64,7 @@ mvn test
 ```
 
 Velocity history is process-local and in-memory. Hosted production deployments require a separate security, privacy, operational, and regulatory review.
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
